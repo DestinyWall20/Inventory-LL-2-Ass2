@@ -135,4 +135,6 @@ public class ItemStack implements Cloneable
     {
         return String.format("(%2d) %s", this.quantity, this.item.getName());
     }
+
+   
 }

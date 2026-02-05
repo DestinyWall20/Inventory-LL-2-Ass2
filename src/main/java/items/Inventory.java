@@ -30,6 +30,14 @@ public class Inventory
         // lhs needs to have items added to it.
         // rhs's size is needed
         // lhs.????(rhs.????)
+
+        // Create a temporary
+        ItemStack temp = new ItemStack();
+        // Get the size of rhs
+        int qtyToAdd = rhs.size();
+        lhs.addItems(qtyToAdd);
+
+
     }
 
     /**
@@ -94,7 +102,8 @@ public class Inventory
     public boolean isFull()
     {
         // Replace the next line
-        return false;
+        //check if current size equals capacity
+        return this.slots.currentSize == this.capacity;
     }
 
     /**
@@ -118,6 +127,18 @@ public class Inventory
     public ItemStack findMatchingItemStack(ItemStack key)
     {
         // Add the necessary sequential search loop
+        // to find a matching ItemStack in the LinkedList
+       
+        LinkedList.Node<ItemStack> current = this.slots.head;
+
+        // Iterate through the list until I find a match or reach the end
+        while (current != null) {
+            ItemStack stack = current.data;
+            if (stack.equals(key)) {
+                return stack;
+            }
+            current = current.next;
+        }
 
         return null;
     }
@@ -133,6 +154,22 @@ public class Inventory
 
         // Use the appendNode/add logic from Review 1 as your starting point
         // Once we reach this function... we know that `toAdd` must be stored
+        
+       if (this.slots.head == null) {
+        // List is empty
+            this.slots.head = newNode;
+            this.slots.tail = newNode;
+        //Increment size
+            this.slots.currentSize = 1;
+}
+        else {
+            // List is non-empty
+            this.slots.tail.next = newNode;
+            this.slots.tail = newNode;
+            this.slots.currentSize++;
+        }
+        
+
     }
 
     /**
