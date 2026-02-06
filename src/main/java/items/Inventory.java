@@ -32,11 +32,7 @@ public class Inventory
         // lhs.????(rhs.????)
 
         // Create a temporary
-        ItemStack temp = new ItemStack();
-        // Get the size of rhs
-        int qtyToAdd = rhs.size();
-        lhs.addItems(qtyToAdd);
-
+       lhs.addItems(rhs.size());
 
     }
 
@@ -129,15 +125,14 @@ public class Inventory
         // Add the necessary sequential search loop
         // to find a matching ItemStack in the LinkedList
        
-        LinkedList.Node<ItemStack> current = this.slots.head;
+        LinkedList.Node<ItemStack> it = this.slots.head;
 
         // Iterate through the list until I find a match or reach the end
-        while (current != null) {
-            ItemStack stack = current.data;
-            if (stack.equals(key)) {
-                return stack;
+        while (it != null) {
+            if (it.data.equals(key)) {
+                return it.data;
             }
-            current = current.next;
+            it = it.next;
         }
 
         return null;
